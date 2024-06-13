@@ -1,0 +1,431 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "NeurIPS_2024_Seshat_Benchmark",
+  "description": "Large Language Models (LLMs) have the potential to transform humanities and social science research, but their knowledge and comprehension of history at a graduate and academic expert level have not been thoroughly benchmarked. This benchmarking is particularly challenging, given that human knowledge of history is inherently unbalanced, with more information available on Western history and recent periods. To address this challenge, we introduce a curated sample of the Seshat Global History Databank, which provides a structured representation of human historical knowledge, containing 36,000 data points across 600 historical societies and over 600 scholarly references. This dataset covers every major world region from the Neolithic period to the Industrial Revolution and includes information reviewed and assembled by history experts and graduate research assistants. Using these data, we benchmark the historical knowledge of GPT-3.5, GPT-4-Turbo, GPT-4o, and LLama-3-70b. Our findings reveal that LLMs demonstrate balanced accuracy ranging from 37.3% (GPT-3.5) to 43.8% (GPT-4-Turbo) in a four-choice format, outperforming random guessing (25%) but falling short of expert comprehension. LLMs perform better on earlier historical periods, with accuracy decreasing for more recent times. Regionally, performance is more even but still better for the Americas and lowest in Sub-Saharan Africa for the more advanced models. Our benchmark suggests that while LLMs possess some expert-level historical knowledge, there is considerable room for improvement.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "citeAs": "@article{brown2020language, title={Language Models are Few-Shot Learners}, author={Tom B. Brown and Benjamin Mann and Nick Ryder and Melanie Subbiah and Jared Kaplan and Prafulla Dhariwal and Arvind Neelakantan and Pranav Shyam and Girish Sastry and Amanda Askell and Sandhini Agarwal and Ariel Herbert-Voss and Gretchen Krueger and Tom Henighan and Rewon Child and Aditya Ramesh and Daniel M. Ziegler and Jeffrey Wu and Clemens Winter and Christopher Hesse and Mark Chen and Eric Sigler and Mateusz Litwin and Scott Gray and Benjamin Chess and Jack Clark and Christopher Berner and Sam McCandlish and Alec Radford and Ilya Sutskever and Dario Amodei}, year={2020}, eprint={2005.14165}, archivePrefix={arXiv}, primaryClass={cs.CL} }",
+  "license": "CC BY 4.0",
+  "url": "https://github.com/seshat-db/NeurIPS_2024_Seshat_Benchmark",
+  "version": "0.1.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repository",
+      "name": "github-repository",
+      "description": "Seshat Benchmark Github repository",
+      "contentUrl": "https://github.com/seshat-db/NeurIPS_2024_Seshat_Benchmark",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "jsonl-files",
+      "name": "jsonl-file",
+      "description": "Parquet file is hosted on the GitHub repository.",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/jsonlines",
+      "includes": "data/*.jsonl"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "jsonl",
+      "name": "jsonl",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/Q",
+          "name": "Q",
+          "description": "The multiple choice question.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "Q"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/A",
+          "name": "A",
+          "description": "The expected completion of the prompt.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "A"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/polity_old_id",
+          "name": "polity_old_id",
+          "description": "ID for polity according to Seshat ids",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "polity_old_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/start_year_str",
+          "name": "start_year_str",
+          "description": "String for when polity started existing (in BCE/CE format)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "start_year_str"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/end_year_str",
+          "name": "end_year_str",
+          "description": "String for when polity stopped existing (in BCE/CE format)",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "end_year_str"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/start_year_int",
+          "name": "start_year_int",
+          "description": "Int for when polity started existing (in BCE/CE format)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "start_year_int"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/end_year_int",
+          "name": "end_year_int",
+          "description": "Int for when polity stopped existing (in BCE/CE format)",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "end_year_int"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/name",
+          "name": "name",
+          "description": "Polity name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/nga",
+          "name": "nga",
+          "description": "Natural Geographic Area for Polity",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "nga"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/category",
+          "name": "category",
+          "description": "immediate parent category of fact from seshat codebook",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "category"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/root_cat",
+          "name": "root_cat",
+          "description": "Root category of fact from seshat codebook",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "root_cat"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/seshat_value",
+          "name": "seshat_value",
+          "description": "Value of fact in Seshat",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "seshat_value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/request_id",
+          "name": "request_id",
+          "description": "request id for openai batch requests",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "request_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/n_shot_examples",
+          "name": "n_shot_examples",
+          "description": "4-shot examples as json string",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "n_shot_examples"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/openai_message",
+          "name": "openai_message",
+          "description": "full query including system messages as json string",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "openai_message"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/gpt4-o",
+          "name": "gpt4-o",
+          "description": "responses for gpt4-o model",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "gpt4-o"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/meta-llama/Llama-3-70b-chat-hf",
+          "name": "meta-llama/Llama-3-70b-chat-hf",
+          "description": "responses for meta-llama/Llama-3-70b-chat-hf model",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "meta-llama/Llama-3-70b-chat-hf"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/gpt-4-turbo-2024-04-09",
+          "name": "gpt-4-turbo-2024-04-09",
+          "description": "responses for gpt-4-turbo-2024-04-09 model",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "gpt-4-turbo-2024-04-09"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/region",
+          "name": "region",
+          "description": "World region for fact",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "region"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/description",
+          "name": "description",
+          "description": "Description provided by RAs for fact",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/raw_reference_text",
+          "name": "raw_reference_text",
+          "description": "Raw reference text for fact source material",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "raw_reference_text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/bibtex_json",
+          "name": "bibtex_json",
+          "description": "Bibtex json string for fact source material",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "bibtex_json"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/zotero_id",
+          "name": "zotero_id",
+          "description": "Zotero ID for Seshat internal reference",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "zotero_id"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
