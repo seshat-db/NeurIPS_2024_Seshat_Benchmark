@@ -1,1 +1,0 @@
-# NeurIPS_2024_Seshat_Benchmark

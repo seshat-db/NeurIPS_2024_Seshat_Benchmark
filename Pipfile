@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+polars = "*"
+scipy = "*"
+seaborn = "*"
+pyarrow = "*"
+tqdm = "*"
+regex = "*"
+openai = "*"
+python-dotenv = "*"
+pyvis = "*"
+matplotlib = "*"
+tenacity = "*"
+together = "~=1.2.0"
+aiofiles = "*"
+mlcroissant = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
